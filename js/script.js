@@ -29,13 +29,39 @@ function controlloNumeriUguali(array , num) {
 }
 
 var arrayNumeriRandom = [];
+var numRandom = 0;
 var arrayNumeriUtente = [];
 var numUtente = 0;
-var punteggio = false;
+var difficolta = 0;
 var quantitaNumDaInserire = 10;
 
-for (var i = 0; i < 16; i++) {
-  arrayNumeriRandom.push(getRandomInt(1, 100));
+
+
+
+
+alert("Benvenuto in Campo Minato")
+difficolta = parseInt(prompt("Scegli a che difficoltà vuoi giocare in base ad un range di numeri casuali : Con difficoltà 0 => tra 1 e 100 || Con difficoltà 1 =>  tra 1 e 80 || Con difficoltà 2 => tra 1 e 50"))
+if (difficolta == 2 ) {
+  for (var i = 0; i < 16; i++) {
+    numRandom = getRandomInt(1, 50);
+    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
+      arrayNumeriRandom.push(numRandom);
+    }
+  }
+} else if (difficolta == 1 ) {
+  for (var i = 0; i < 16; i++) {
+    numRandom = getRandomInt(1, 80);
+    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
+      arrayNumeriRandom.push(numRandom);
+    }
+  }
+} else if (difficolta == 0 || isNaN(difficolta)) {
+  for (var i = 0; i < 16; i++) {
+    numRandom = getRandomInt(1, 100);
+    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
+      arrayNumeriRandom.push(numRandom);
+    }
+  }
 }
 console.log(arrayNumeriRandom);
 
@@ -62,5 +88,3 @@ console.log("Hai totalizzato", i , "Punti");
 } else {
 console.log("Hai totalizzato", (i-1) , "Punti");
 }
-
-console.log(arrayNumeriUtente);
