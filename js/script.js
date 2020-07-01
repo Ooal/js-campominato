@@ -28,6 +28,14 @@ function controlloNumeriUguali(array , num) {
   return false;
 }
 
+function livelloDifficolta (min, max) {
+  while (arrayNumeriRandom.length < quantitaBombe) {
+    numRandom = getRandomInt(min, max);
+    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
+      arrayNumeriRandom.push(numRandom);
+    }
+  }
+}
 var arrayNumeriRandom = [];
 var numRandom = 0;
 var arrayNumeriUtente = [];
@@ -42,33 +50,27 @@ var maximo = 0;
 
 alert("Benvenuto in Campo Minato")
 difficolta = parseInt(prompt("Scegli a che difficoltà vuoi giocare in base ad un range di numeri casuali : Con difficoltà 0 => tra 1 e 100 || Con difficoltà 1 =>  tra 1 e 80 || Con difficoltà 2 => tra 1 e 50"))
-if (difficolta == 2 ) {
-  while (arrayNumeriRandom.length < quantitaBombe) {
-    var minimo = 1;
-    var maximo = 50;
-    numRandom = getRandomInt(minimo, maximo);
-    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
-      arrayNumeriRandom.push(numRandom);
-    }
-  }
-} else if (difficolta == 1 ) {
-  while (arrayNumeriRandom.length < quantitaBombe) {
-    var minimo = 1;
-    var maximo = 80;
-    numRandom = getRandomInt(minimo, maximo);
-    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
-      arrayNumeriRandom.push(numRandom);
-    }
-  }
-} else if (difficolta == 0 || isNaN(difficolta)) {
-  while (arrayNumeriRandom.length < quantitaBombe) {
-    var minimo = 1;
-    var maximo = 100;
-    numRandom = getRandomInt(minimo, maximo);
-    if (!(controlloNumeriUguali(arrayNumeriUtente, numUtente))) {
-      arrayNumeriRandom.push(numRandom);
-    }
-  }
+switch (difficolta) {
+  case 2:
+    minimo = 1;
+    maximo = 50;
+    livelloDifficolta(minimo, maximo);
+    break;
+  case 1:
+    minimo = 1;
+    maximo = 80;
+    livelloDifficolta(minimo, maximo);
+    break;
+  case 0:
+    minimo = 1;
+    maximo = 100;
+    livelloDifficolta(minimo, maximo);
+    break;
+  default:
+    minimo = 1;
+    maximo = 100;
+    livelloDifficolta(minimo, maximo);
+    break;
 }
 console.log(arrayNumeriRandom);
 
@@ -77,7 +79,7 @@ var quantitaNumDaInserire = maximo - quantitaBombe;
 console.log(quantitaNumDaInserire);
 var i = 0;
 while (i < quantitaNumDaInserire) {
-  numUtente = parseInt(prompt("Inserisci " + quantitaNumDaInserire + " numeri per vincere da " + minimo + " a " + maximo ));
+  numUtente = parseInt(prompt("Inserisci " + quantitaNumDaInserire + " numeri per vincere, da " + minimo + " a " + maximo ));
   if (numUtente < minimo || numUtente > maximo || isNaN(numUtente)) {
     alert("Devi inserire solo e solamente NUMERI e devono essere compresi fra " + minimo + " e " + maximo + " riententa , prego")
   } else if (controlloNumeriUguali(arrayNumeriUtente, numUtente)) {
